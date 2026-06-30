@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish and Frites - Anstruther | Royal Mile Edinburgh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2c5a8a;
+            --accent: #c9a84c;
+            --accent-light: #e8d5a3;
+            --dark: #0f1f2e;
+            --dark-light: #1a2d3d;
+            --light: #f8f6f0;
+            --text: #2c3e50;
+            --text-light: #6b7c8d;
+            --white: #ffffff;
+            --success: #2ecc71;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 31, 46, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            padding: 0.8rem 3rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(15,31,46,0.85) 0%, rgba(26,58,92,0.8) 100%),
+                        url('https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=1920&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent-light);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .hero-location {
+            color: var(--accent-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .hero-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .stars i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .rating-text strong {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201,168,76,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(15,31,46,0.7), transparent);
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-text p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-light) 100%);
+            color: var(--white);
+        }
+
+        .menu .section-label {
+            color: var(--accent);
+        }
+
+        .menu .section-title {
+            color: var(--white);
+        }
+
+        .menu .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .menu-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+
+        .menu-category-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(5px);
+            border-color: var(--accent);
+        }
+
+        .menu-item-info {
+            flex: 1;
+        }
+
+        .menu-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .menu-item-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .tag-gf {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .tag-fish {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .tag-award {
+            background: rgba(201, 168, 76, 0.2);
+            color: var(--accent-light);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+        }
+
+        .menu-item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-left: 1rem;
+        }
+
+        .menu-note {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(201,168,76,0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(201,168,76,0.2);
+        }
+
+        .menu-note p {
+            color: var(--accent-light);
+            font-size: 1rem;
+        }
+
+        .menu-note i {
+            margin-right: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(15,31,46,0.9), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: var(--white);
+        }
+
+        .reviews-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .review-meta h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .review-meta span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .review-stars {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .review-text {
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .review-text strong {
+            color: var(--primary);
+        }
+
+        .review-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Info Section */
+        .info {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: var(--white);
+        }
+
+        .info-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .info-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .info-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
+
+        .info-list li i {
+            color: var(--accent);
+            width: 20px;
+        }
+
+        .info-list li .no {
+            color: #e74c3c;
+        }
+
+        .hours-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .hours-status.open {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+
+        /* Location Section */
+        .location {
+            background: var(--light);
+        }
+
+        .location-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .location-map {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            height: 400px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .location-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-detail i {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .location-detail h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .location-detail p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .location-detail a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .location-detail a:hover {
+            color: var(--accent);
+        }
+
+        .directions-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .directions-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero h1 span {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.featured {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--dark);
+            z-index: 2000;
+            padding: 5rem 2rem 2rem;
+            transition: right 0.4s ease;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <i class="fas fa-fish"></i>
+            <span>Fish & Frites</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#location">Location</a></li>
+        </ul>
+        <a href="#menu" class="nav-cta">View Menu</a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
+            <li><a href="#menu" onclick="toggleMobileMenu()">Menu</a></li>
+            <li><a href="#gallery" onclick="toggleMobileMenu()">Gallery</a></li>
+            <li><a href="#reviews" onclick="toggleMobileMenu()">Reviews</a></li>
+            <li><a href="#location" onclick="toggleMobileMenu()">Location</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-award"></i>
+                Award-Winning Fish & Chips
+            </div>
+            <h1>
+                Fish and Frites
+                <span>Anstruther on the Royal Mile</span>
+            </h1>
+            <p class="hero-subtitle">Authentic Scottish Fish & Chips Experience</p>
+            <p class="hero-location">
+                <i class="fas fa-map-marker-alt"></i>
+                Castlehill, The Terrace Of, The Hub, Edinburgh EH1 2NE
+            </p>
+            <div class="hero-rating">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text"><strong>4.8</strong> / 5.0 (175+ Reviews)</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn-primary">
+                    <i class="fas fa-utensils"></i>
+                    Explore Our Menu
+                </a>
+                <a href="https://maps.app.goo.gl/VRBk4xW8KumWnpkB7" target="_blank" class="btn-secondary">
+                    <i class="fas fa-location-arrow"></i>
+                    Get Directions
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="about-grid">
+            <div class="about-image fade-in">
+                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&q=80" alt="Fish and Chips Food Truck">
+            </div>
+            <div class="about-content fade-in">
+                <span class="section-label">About Us</span>
+                <h2>A Taste of Scotland on the Royal Mile</h2>
+                <p>Bringing the legendary flavours of Anstruther's famous fish and chips to the heart of Edinburgh's historic Royal Mile. Our food truck serves up freshly prepared, made-to-order Scottish classics using the finest locally sourced ingredients.</p>
+                <p>From our signature Fresh Scottish Haddock to our traditional Haggis & Chips, every dish is crafted with passion and served with a side of Scottish hospitality. We use MSC-certified sustainable seafood and offer gluten-free options for many of our menu items.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Fresh Scottish Fish</h4>
+                            <p>Sustainably sourced daily</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Gluten-Free Options</h4>
+                            <p>Available on select items</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>MSC Certified</h4>
+                            <p>Sustainable seafood</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Made to Order</h4>
+                            <p>Cooked fresh for you</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu" id="menu">
+        <div class="section-header fade-in">
+            <span class="section-label">Our Menu</span>
+            <h2 class="section-title">Scottish Classics & More</h2>
+            <p class="section-subtitle">All dishes served with our signature crispy chips and homemade tartare sauce</p>
+        </div>
+        <div class="menu-grid fade-in">
+            <div class="menu-category">
+                <h3 class="menu-category-title"><i class="fas fa-fish"></i> Signature Dishes</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">
+                                Haddock & Chips
+                                <span class="tag tag-fish"><i class="fas fa-fish"></i> MSC</span>
+                            </div>
+                            <p class="menu-item-desc">Fresh Scottish Haddock, hand-battered and deep-fried to golden perfection</p>
+                        </div>
+                        <span class="menu-item-price">£16</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">
+                                Kiln Smoked Salmon & Chips
+                                <span class="tag tag-gf">GF</span>
+                            </div>
+                            <p class="menu-item-desc">Premium Scottish kiln-smoked salmon with our crispy chips</p>
+                        </div>
+                        <span class="menu-item-price">£17</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Sausage & Chips</div>
+                            <p class="menu-item-desc">Traditional Scottish sausage, battered and fried with chips</p>
+                        </div>
+                        <span class="menu-item-price">£12</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">
+                                Haggis & Chips
+                                <span class="tag tag-award"><i class="fas fa-award"></i> Scottish Classic</span>
+                            </div>
+                            <p class="menu-item-desc">Traditional Scottish haggis, battered and served with crispy chips</p>
+                        </div>
+                        <span class="menu-item-price">£12</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Veggie Haggis & Chips</div>
+                            <p class="menu-item-desc">Vegetarian haggis alternative, battered and fried with chips</p>
+                        </div>
+                        <span class="menu-item-price">£12</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-category">
+                <h3 class="menu-category-title"><i class="fas fa-plus-circle"></i> Extras & Sides</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">
+                                Chips
+                                <span class="tag tag-gf">GF</span>
+                            </div>
+                            <p class="menu-item-desc">Our signature crispy golden chips</p>
+                        </div>
+                        <span class="menu-item-price">£5</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Homemade Tartare Sauce</div>
+                            <p class="menu-item-desc">Creamy, tangy house-made tartare sauce</p>
+                        </div>
+                        <span class="menu-item-price">£2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-note">
+                <p><i class="fas fa-glass-water"></i> Cold drinks available — Please ask for allergen information</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="section-header fade-in">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">Our Popular Dishes</h2>
+            <p class="section-subtitle">See what our customers love most</p>
+        </div>
+        <div class="gallery-grid fade-in">
+            <div class="gallery-item featured">
+                <img src="https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=800&q=80" alt="Fish and Chips">
+                <div class="gallery-overlay">
+                    <h4>Fish and Chips</h4>
+                    <p>Our Signature Dish</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80" alt="Haggis">
+                <div class="gallery-overlay">
+                    <h4>Haggis</h4>
+                    <p>Scottish Classic</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=80" alt="French Fries">
+                <div class="gallery-overlay">
+                    <h4>French Fries</h4>
+                    <p>Crispy & Golden</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80" alt="Smoked Salmon">
+                <div class="gallery-overlay">
+                    <h4>Smoked Salmon</h4>
+                    <p>Kiln Smoked</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section reviews" id="reviews">
+        <div class="section-header fade-in">
+            <span class="section-label">Testimonials</span>
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Rated 4.8/5 by over 175 happy customers</p>
+        </div>
+        <div class="reviews-grid fade-in">
+            <div class="review-card">
+                <span class="review-badge">Local Guide</span>
+                <div class="review-header">
+                    <div class="review-avatar">RP</div>
+                    <div class="review-meta">
+                        <h4>Rikki Pittman</h4>
+                        <span>Local Guide · 11 Reviews · 10 Photos</span>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"I was in Edinburgh last week and found this precious spot on the Royal Mile. I ordered Fish and Chips and a soda. The food is made to order, so they give you a device to let you know when it's ready. There were a few orders ahead of me, but it was absolutely worth the wait!"</p>
+            </div>
+            <div class="review-card">
+                <span class="review-badge">Local Guide</span>
+                <div class="review-header">
+                    <div class="review-avatar">SE</div>
+                    <div class="review-meta">
+                        <h4>Štěpánka Edlová</h4>
+                        <span>Local Guide · 43 Reviews · 39 Photos</span>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Good choice and for me the <strong>best fish'n'chips I've ever had</strong>. Tender haddock, home-made tartar sauce (I would slightly reduce the sour taste, but still good). Overall <strong>ten out of ten!</strong>"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section info" id="info">
+        <div class="section-header fade-in">
+            <span class="section-label">Information</span>
+            <h2 class="section-title" style="color: var(--white);">Everything You Need to Know</h2>
+        </div>
+        <div class="info-grid fade-in">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <h3>Service Options</h3>
+                <ul class="info-list">
+                    <li><i class="fas fa-check"></i> Dine-in</li>
+                    <li><i class="fas fa-check"></i> Kerbside Pickup</li>
+                    <li><i class="fas fa-check"></i> Takeaway</li>
+                    <li><i class="fas fa-check"></i> Outdoor Seating</li>
+                    <li><i class="fas fa-times no"></i> Delivery</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Opening Hours</h3>
+                <p>Open Daily</p>
+                <div class="hours-status" id="hoursStatus">
+                    <i class="fas fa-circle"></i>
+                    <span>Opens 11:00 AM</span>
+                </div>
+                <ul class="info-list" style="margin-top: 1.5rem;">
+                    <li><i class="fas fa-sun"></i> Lunch</li>
+                    <li><i class="fas fa-moon"></i> Dinner</li>
+                    <li><i class="fas fa-user"></i> Solo Dining</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <h3>Offerings</h3>
+                <ul class="info-list">
+                    <li><i class="fas fa-wine-glass"></i> Alcohol</li>
+                    <li><i class="fas fa-beer"></i> Beer</li>
+                    <li><i class="fas fa-bolt"></i> Quick Bite</li>
+                    <li><i class="fas fa-wheelchair"></i> Wheelchair Accessible</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section location" id="location">
+        <div class="section-header fade-in">
+            <span class="section-label">Find Us</span>
+            <h2 class="section-title">Visit Us on the Royal Mile</h2>
+            <p class="section-subtitle">Located at the heart of Edinburgh's historic Old Town</p>
+        </div>
+        <div class="location-grid fade-in">
+            <div class="location-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.1234567890123!2d-3.1942!3d55.9486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTXCsDU2JzU1LjAiTiAzwrAxMSczOS4xIlc!5e0!3m2!1sen!2suk!4v1234567890"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="location-info">
+                <h3>Get in Touch</h3>
+                <div class="location-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Castlehill, The Terrace Of, The Hub<br>Edinburgh EH1 2NE, United Kingdom</p>
+                    </div>
+                </div>
+                <div class="location-detail">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Daily: 11:00 AM – Late</p>
+                    </div>
+                </div>
+                <div class="location-detail">
+                    <i class="fas fa-pound-sign"></i>
+                    <div>
+                        <h4>Price Range</h4>
+                        <p>£10 – £20 per person</p>
+                    </div>
+                </div>
+                <div class="location-detail">
+                    <i class="fas fa-share-alt"></i>
+                    <div>
+                        <h4>Share</h4>
+                        <p><a href="https://maps.app.goo.gl/VRBk4xW8KumWnpkB7" target="_blank">Google Maps Link</a></p>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/VRBk4xW8KumWnpkB7" target="_blank" class="directions-btn">
+                    <i class="fas fa-location-arrow"></i>
+                    Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3><i class="fas fa-fish"></i> Fish and Frites</h3>
+                <p>Bringing the legendary flavours of Anstruther's famous fish and chips to the heart of Edinburgh's Royal Mile. Fresh, sustainable, and made with Scottish pride.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Dine-in</a></li>
+                    <li><a href="#">Takeaway</a></li>
+                    <li><a href="#">Kerbside Pickup</a></li>
+                    <li><a href="#">Outdoor Seating</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="https://maps.app.goo.gl/VRBk4xW8KumWnpkB7" target="_blank">Edinburgh EH1 2NE</a></li>
+                    <li><a href="#">Open Daily 11 AM</a></li>
+                    <li><a href="#">£10 – £20 Range</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> Fish and Frites - Anstruther. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Allergen Info</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileOverlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Opening hours status
+        function updateHoursStatus() {
+            const now = new Date();
+            const hour = now.getHours();
+            const statusEl = document.getElementById('hoursStatus');
+
+            if (hour >= 11) {
+                statusEl.classList.add('open');
+                statusEl.innerHTML = '<i class="fas fa-circle"></i><span>Open Now</span>';
+            } else {
+                statusEl.innerHTML = '<i class="fas fa-circle"></i><span>Opens 11:00 AM</span>';
+            }
+        }
+        updateHoursStatus();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
